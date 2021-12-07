@@ -373,3 +373,173 @@ sleep 1
 echo -e '\nMostrando permisos de los directorios'
 ls -l
 
+
+#53. Crear el fichero uno . Quitarle todos los permisos de lectura. Comprobarlo. Intentar borrar dicho fichero.  
+echo -e '\n53. Crear el fichero uno . Quitarle todos los permisos de lectura. Comprobarlo. Intentar borrar dicho fichero. '
+sleep 1
+echo -e '\nCreando archivo'
+touch uno
+echo -e '\nQuitando permisos de lectura'
+chhmod -r uno
+echo -e '\nMostrando permisos'
+ls -l uno
+echo -e '\nBorrando archivo'
+rm -r uno
+
+#54. Quitarle todos los permisos de paso al directorio dir2 y otorgarle todos los demás.   
+echo -e '\n54. Quitarle todos los permisos de paso al directorio dir2 y otorgarle todos los demás.  '
+sleep 1
+
+#55. Crear en el directorio propio: 
+#El directorio carpeta1 con los tres permisos para el propietario, dentro de él fich1 con lectura y escritura para todos y fich2 con lectura y escritura para el propietario y solo lectura para el resto. 
+#El directorio carpeta2 con todos los permisos para el propietario y lectura y ejecución para los del mismo grupo. Dentro file1 con lectura y escritura para el propietario y los del grupo y file2 con los mismos para el propietario y solo lectura para el grupo.   
+echo -e '\n55. Crear en el directorio propio: 
+El directorio carpeta1 con los tres permisos para el propietario, dentro de él fich1 con lectura y escritura para todos y fich2 con lectura y escritura para el propietario y solo lectura para el resto. 
+El directorio carpeta2 con todos los permisos para el propietario y lectura y ejecución para los del mismo grupo. Dentro file1 con lectura y escritura para el propietario y los del grupo y file2 con los mismos para el propietario y solo lectura para el grupo.   '
+sleep 1
+echo -e '\nCreando carpetas'
+mkdir carpeta1 carpeta2
+echo -e '\nModificando permisos de las carpetas'
+chmod 744 carpeta1
+chmod 755 carpeta2
+echo -e '\nCreando ficheros'
+touch carpeta1/fich1 carpeta1/fich2 carpeta2/file1 carpeta2/file2
+echo -e '\nModificando permisos de los ficheros'
+chmod 666 carpeta1/fich1
+chmod 644 carpeta1/fich2
+chmod 666 carpeta2/file1
+chmod 644 carpeta2/file2
+
+
+#56. Desde otro usuario probar todas las operaciones que se pueden hacer en los ficheros y directorios creados. 
+echo -e '\n56. Desde otro usuario probar todas las operaciones que se pueden hacer en los ficheros y directorios creados.  '
+sleep 1
+echo -e '\nMostrando permisos'
+ls -R -l
+
+
+#57. Visualizar la trayectoria completa del directorio actual. Crear dos directorios llamados correo y fuentes debajo del directorio actual.
+echo -e '\n57. Visualizar la trayectoria completa del directorio actual. Crear dos directorios llamados correo y fuentes debajo del directorio actual.'
+sleep 1
+echo -e '\nVisualizando trayectoria'
+pwd
+echo -e '\nCreando carpetas'
+mkdir correo fuentes
+echo -e '\nMostrando carpetas'
+ls 
+
+
+
+#58. Posicionarse en el directorio fuentes y crear los directorios dir1, dir2, dir3. 
+echo -e '\n58. Posicionarse en el directorio fuentes y crear los directorios dir1, dir2, dir3. '
+sleep 1
+echo -e '\nCambiando de directorio'
+cd fuentes 
+echo -e '\nCreando directorios'
+mkdir dir1 dir2 dir3
+echo -e '\nMostrando carpetas'
+ls 
+
+#59. Crear el directorio menus bajo correo sin moverse del directorio actual. 
+echo -e '\n59. Crear el directorio menus bajo correo sin moverse del directorio actual. '
+sleep 1
+echo -e '\nCreando directorios'
+mkdir ../correo/menus 
+echo -e '\nMostrando contenido'
+ls ../correo
+
+
+
+#60. Posicionarse en el directorio HOME. Borrar los directorios que cuelgan de fuentes que acaben en un número que no sea el 1. 
+echo -e '\n60. Posicionarse en el directorio HOME. Borrar los directorios que cuelgan de fuentes que acaben en un número que no sea el 1.  '
+sleep 1
+echo -e '\nCambiando a directorio HOME'
+cd $HOME
+pwd
+find /fuentes -type d -name "*1" -exec rm -r {} \; 
+
+#61. Ver si existe el archivo tty2 en el directorio dev. En caso de que exista, ver su fecha de creación o actualización. 
+echo -e '\n61. Ver si existe el archivo tty2 en el directorio dev. En caso de que exista, ver su fecha de creación o actualización.  '
+sleep 1
+find /dev -type d -name "tty2" -exec ls -l {} \;
+
+
+#62. Ver los permisos que tienen los archivos que empiecen por tt del directorio /dev. 
+echo -e '\n62. Ver los permisos que tienen los archivos que empiecen por tt del directorio /dev. '
+sleep 1
+ls -l /dev/tt*
+
+#63. Visualizar la lista de los archivos ordinarios que están en el directorio /usr/bin. 
+echo -e '\n63. Visualizar la lista de los archivos ordinarios que están en el directorio /usr/bin. '
+sleep 1
+find /usr/bin -type d -name "*" -exec ls -l {} \;
+
+#64. Visualizar la lista de todos los directorios que cuelgan del raíz. . 
+echo -e '\n64. Visualizar la lista de todos los directorios que cuelgan del raíz. '
+sleep 1
+find / -type d -name "*" -exec ls {} \;
+
+
+#65. Visualizar la lista de todos los ficheros que pertenezcan a root.
+echo -e '\n65. Visualizar la lista de todos los ficheros que pertenezcan a root. '
+sleep 1
+find / -user root -type f
+
+
+#66. Visualizar la lista de todos los ficheros .h del directorio /usr/include. 
+echo -e '\n66. Visualizar la lista de todos los ficheros .h del directorio /usr/include. '
+sleep 1
+find /usr/include -type f -regex "*.h"
+
+
+#67. Ejecutar todos los comandos que empiecen por ls del directorio /bin. 
+echo -e '\n67. Ejecutar todos los comandos que empiecen por ls del directorio /bin. '
+sleep 1
+/bin/./ls*
+
+
+#68. Visualizar de qué tipo son todos y cada uno de ficheros de todo el árbol del sistema propiedad de un usuario conocido. 
+echo -e '\n68. Visualizar de qué tipo son todos y cada uno de ficheros de todo el árbol del sistema propiedad de un usuario conocido. '
+sleep 1
+find / -exec file --mime-type -0 '{}' \;
+
+#69. Crear el directorio uno en el directorio HOME con permiso de escritura y paso para el propietario, de lectura y paso para los usuarios de su mismo grupo y ningún permiso para el resto de usuarios. 
+echo -e '\n69. Crear el directorio uno en el directorio HOME con permiso de escritura y paso para el propietario, de lectura y paso para los usuarios de su mismo grupo y ningún permiso para el resto de usuarios.  '
+sleep 1
+echo -e '\nCreando directorio'
+mkdir uno 
+echo -e '\nModificando permisos'
+chmod 660 uno
+echo -e '\nMostrando información'
+ls -ld uno
+
+#70. Crear el directorio uno1 dentro del directorio creado en el ejercicio anterior con todos lo permisos para el usuario, ninguno para los usuarios del grupo y permiso de escritura para el resto de usuarios. 
+echo -e '\n70. Crear el directorio uno1 dentro del directorio creado en el ejercicio anterior con todos lo permisos para el usuario, ninguno para los usuarios del grupo y permiso de escritura para el resto de usuarios.'
+sleep 1
+echo -e '\nCreando directorio'
+mkdir uno/uno1
+echo -e '\nModificando permisos'
+chmod 702  uno/uno1
+echo -e '\nMostrando información'
+ls -ld uno/uno1
+
+#71. Copiar todos los ficheros propiedad de un usuario conocido que acaben en un número en el directorio menus.  
+echo -e '\n71. Copiar todos los ficheros propiedad de un usuario conocido que acaben en un número en el directorio menus. '
+sleep 1
+find /home/juan -type f -regex ".*[0-9]" -exec cp -r '{}' ~/PRUEBA/correo/menus/ \;
+
+#72. Visualiza con la orden who la relación de usuarios conectados y sus terminales. Mediante la orden cat, crea un pequeño mensaje desde tu consola y redirígelo a uno de los terminales conectados.. 
+echo -e '\n72. Visualiza con la orden who la relación de usuarios conectados y sus terminales. Mediante la orden cat, crea un pequeño mensaje desde tu consola y redirígelo a uno de los terminales conectados.. '
+sleep 1
+touch mensaje
+who > mensaje
+cat mensaje
+
+#73. Crea un archivo de tamaño 0 
+echo -e '\n73. Crea un archivo de tamaño 0  '
+sleep 1
+echo -e '\nCreando archivo'
+touch cero
+echo -e 'Mostrando información del archivo'
+du -s  cero
+
