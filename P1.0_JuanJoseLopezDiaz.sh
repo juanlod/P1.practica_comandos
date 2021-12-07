@@ -24,7 +24,7 @@ ls /dev/tty??
 
 #5 Listar todos los archivos del directorio dev que empiecen por tty y acaben en 1,2,3 ó 4.
 sleep 1
-
+ls /dev/tty[1,2,3,4]
 
 #6 Listar todos los archivos del directorio dev que empiecen por t y acaben en C1.
 echo -e '\n6. Listar todos los archivos del directorio dev que empiecen por t y acaben en C1'
@@ -542,4 +542,122 @@ echo -e '\nCreando archivo'
 touch cero
 echo -e 'Mostrando información del archivo'
 du -s  cero
+
+#74. Visualiza el archivo /etc/motd, que contiene el "mensaje del día".
+echo -e '\n74. Visualiza el archivo /etc/motd, que contiene el "mensaje del día".'
+sleep 1
+cat /etc/motd
+
+#75. Utilizando de entrada la información de los usuarios conectados al sistema, guardar, ordenadas por el campo hora, las líneas correspondientes al usuario que se desee en el archivo persona. .
+echo -e '\n75. Utilizando de entrada la información de los usuarios conectados al sistema, guardar, ordenadas por el campo hora, las líneas correspondientes al usuario que se desee en el archivo persona. '
+sleep 1
+touch persona 
+who | grep $USER | sort -k 4 > persona
+cat persona
+
+
+
+#76. Crear el directorio carpeta debajo del directorio PRUEBA. Quitarle todos los permisos de lectura. A continuación, buscar todos los directorios que cuelguen del directorio propio y guardarlos en el archivo direc. 
+echo -e '\n76. Crear el directorio carpeta debajo del directorio PRUEBA. Quitarle todos los permisos de lectura. A continuación, buscar todos los directorios que cuelguen del directorio propio y guardarlos en el archivo direc. '
+sleep 1
+cd "$(find / -name 'PRUEBA')"
+echo -e '\nCreando carpeta'
+mkdir carpeta
+echo -e '\nQuitando permisos'
+chmod -r carpeta
+echo -e '\nBuscando y guardando archivos'
+find ~ -type d > direc
+cat direc
+
+#77. Volver a realizar la segunda parte del ejercicio anterior, pero redireccionando los errores al fichero malos. Comprobar la información del fichero malos. 
+echo -e '\n77. Volver a realizar la segunda parte del ejercicio anterior, pero redireccionando los errores al fichero malos. Comprobar la información del fichero malos.  '
+sleep 1
+echo -e '\nRedireccionando a malos'
+find ~ -type d > malos
+echo -e '\nComprobando información'
+cat malos
+
+
+#78. Añadir al fichero direc la lista de todos los ficheros ordinarios que cuelguen de /etc. 
+echo -e '\n78. Añadir al fichero direc la lista de todos los ficheros ordinarios que cuelguen de /etc. '
+sleep 1
+ls /etc  >> direc
+echo -e '\nComprobando información'
+cat direc
+
+
+#79. Añadir al archivo nuevalista el/los nombre/s de el/los fichero/s del directorio PRUEBA que contengan en su nombre la cadena "ai", añadiendo el posible error al fichero malos. 
+echo -e '\n79. Añadir al archivo nuevalista el/los nombre/s de el/los fichero/s del directorio PRUEBA que contengan en su nombre la cadena "ai", añadiendo el posible error al fichero malos. '
+sleep 1
+find ./ -name *ai* 2>/dev/null 1 > nuevalista
+
+
+#80. Sacar por pantalla únicamente el tiempo (buscar comando time) que tarda en ejecutarse el comando who
+echo -e '\n80. Sacar por pantalla únicamente el tiempo (buscar comando time) que tarda en ejecutarse el comando who'
+sleep 1
+time who -p
+
+
+#81. Sacar por pantalla un listado completo (buscar comando ps) de los procesos que está realizando el usuario root. 
+echo -e '\n81. Sacar por pantalla un listado completo (buscar comando ps) de los procesos que está realizando el usuario root. '
+sleep 1
+ps -u root
+
+#82. Crear el archivo proceso con los procesos que no tienen ningún terminal asignado.
+echo -e '\n82. Crear el archivo proceso con los procesos que no tienen ningún terminal asignado.'
+sleep 1
+ps -A | grep ? > proceso
+
+
+#83. Añadir al fichero anterior la fecha actual y la trayectoria completa del directorio actual.
+echo -e '\n83. Añadir al fichero anterior la fecha actual y la trayectoria completa del directorio actual.'
+sleep 1
+date >> proceso; pwd >> proceso
+echo -e '\nComprobando información'
+cat proceso
+
+#84. Sacar por pantalla el listado de todos los usuarios conectados ordenados por número de proceso asignado. 
+echo -e '\n84. Sacar por pantalla el listado de todos los usuarios conectados ordenados por número de proceso asignado. '
+sleep 1
+ps axu
+
+#85. Averiguar cuál es la actividad actual del sistema. Para ello visualice un listado completo del estado de todos los procesos que se están ejecutando en el sistema. 
+echo -e '\n85. Averiguar cuál es la actividad actual del sistema. Para ello visualice un listado completo del estado de todos los procesos que se están ejecutando en el sistema. '
+sleep 1
+ps -A
+
+
+#86. Obtener un listado con los siguientes datos de los procesos de su shell actual. 
+echo -e '\n86. Obtener un listado con los siguientes datos de los procesos de su shell actual.'
+sleep 1
+ps -T
+
+
+#87. Mostrar cuantos usuarios tiene registrados el sistema (el registro de usuarios está en el archivo /etc/passwd) 
+echo -e '\n87. Mostrar cuantos usuarios tiene registrados el sistema (el registro de usuarios está en el archivo /etc/passwd) '
+sleep 1
+cat /etc/passwd | wc -l
+
+
+#88. Mostrar cuántos usuarios tiene registrados el sistema y que utilizan el intérprete bash (debe aparecer al final de la línea /bin/bash o similar) 
+echo -e '\n88. Mostrar cuántos usuarios tiene registrados el sistema y que utilizan el intérprete bash (debe aparecer al final de la línea /bin/bash o similar) '
+sleep 1
+cat /etc/passwd | grep "bin/bash" | wc -l
+
+#89. Mostrar cuantos usuarios hay conectados 
+echo -e '\n89. Mostrar cuantos usuarios hay conectados '
+sleep 1
+who -q
+
+#90. Mostrar las líneas, de un archivo de texto, empiecen por L (mayúscula o minúscula) 
+echo -e '\n90. Mostrar las líneas, de un archivo de texto, empiecen por L (mayúscula o minúscula) '
+sleep 1
+grep -i '^[Ll]' malos
+
+#91. Contar las líneas, del ejemplo anterior 
+echo -e '\n91. Contar las líneas, del ejemplo anterior '
+sleep 1
+cat malos | grep -i '^[Ll]' | wc -l
+
+
 
